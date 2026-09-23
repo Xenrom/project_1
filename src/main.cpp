@@ -12,50 +12,22 @@ int main() {
     std::vector<std::vector<int>> Maze = maze::Maze;
     robot::Robot rob;
 
-    char move;
+    bool state = true;
     do {
         // Sets position value (ASCII 82 for 'R')
         
         Maze[rob.position[0]][rob.position[1]] = 'R'; 
         
         printMaze(Maze);
-        std::cout << "Press 'w'-up: 'a'-left: 's'-down: 'd'-right: 'f'-stop: ";
-        std::cin >> move;
-        std::cin.ignore();
 
         int row = rob.position[0];
         int col = rob.position[1];
 
-        switch (move) {
-            case 'w': // Up -> Row - 1
-                if (checkMove(Maze, {row - 1, col})) {
-                    std::cout<<"you moved up" << std::endl;
-                    rob.moveUp();
-                }
-                break;
-            case 'a': // Left -> Col - 1
-                if (checkMove(Maze, {row, col - 1})) {
-                    std::cout<<"you moved left" << std::endl;
-                    rob.moveLeft();
-                }
-                break;
-            case 's': // Down -> Row + 1
-                if (checkMove(Maze, {row + 1, col})) {
-                    std::cout<<"you moved down" << std::endl;
-                    rob.moveDown();
-                }
-                break;
-            case 'd': // Right -> Col + 1
-                if (checkMove(Maze, {row, col + 1})) {
-                    std::cout<<"you moved right" << std::endl;
-                    rob.moveRight();
-                }
-                break;
-        }
+        
 
         Maze[row][col] = {0};
 
-    } while (move != 'f');
+    } while (state);
     
     return 0;
 }
